@@ -1,0 +1,17 @@
+h1 A chatty app 
+p by #{myname}
+p double click to create a message
+
+#msgcanvas
+  
+#proto_msg(display:none)
+  .msg
+    form
+      textarea.msginput(placeholder='type a msg here...')
+    .msgarea
+
+
+script(type='text/javascript', src='/javascripts/msg.js')
+
+
+#moreparts

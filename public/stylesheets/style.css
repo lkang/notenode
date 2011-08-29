@@ -1,0 +1,50 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+a {
+  color: #00b7ff;
+}
+#moreparts {
+  display: block;
+}
+#proto_msg {
+  display: none;
+}
+.msg {
+  border: 1px solid #f00;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  width: 180px;
+  height: 90px;
+  position: absolute;
+  background-image: url("/images/notepad.png");
+  background-position: -13px -110px;
+}
+.message {
+  width: 150px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #f00;
+  background-image: url("/images/darkworld.jpg");
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  color: #fff;
+}
+#inputbox1 {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  margin-top: 4px;
+}
+textarea {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border: 1px solid #00f;
+  width: 175px;
+  height: 15px;
+  background: transparent;
+}
