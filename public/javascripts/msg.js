@@ -1,6 +1,6 @@
 // function() {
   
-  var socket = io.connect('http://192.168.1.107');
+  var socket = io.connect('http://yaygi.no.de');
   
   global_id = 1;
   function nextid() {
