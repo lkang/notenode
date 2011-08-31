@@ -1,0 +1,3 @@
+A bulletin board where notes can be added and viewed. Double click to add notes. Write on them and move them around. 
+
+node.js w/express, socket.io, jade and stylus.
