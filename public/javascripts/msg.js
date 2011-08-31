@@ -1,5 +1,4 @@
-// function() {
-  
+
   var socket = io.connect('http://yaygi.no.de');
   
   global_id = 1;
@@ -24,8 +23,6 @@
       if( event.keyCode == 13 ) {
         text = msginput.val();
         msginput.val('');
-        // var m = $('<p>'+text+'</p>');
-        // msgoutput.text( text );
         socket.emit( 'newnote', { text: text, guid: id })
       }
     });
@@ -64,8 +61,6 @@
       console.log( data );
       if( data.guid != id )
         return; 
-      // addit = $('<p>'+data.text+'</p>');
-      // msgoutput.append( addit );
       msgoutput.text(data.text)
     });
   })
@@ -73,7 +68,4 @@
   $('body').dblclick( function(event) {
     socket.emit( 'created', { text: "", guid: nextid()} );
   })
-
-
-// }();
   
