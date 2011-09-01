@@ -1,5 +1,6 @@
 
-  var socket = io.connect('http://yaygi.no.de');
+// var socket = io.connect('http://yaygi.no.de');
+var socket = io.connect('http://localhost');
   
   global_id = 1;
   function nextid() {
