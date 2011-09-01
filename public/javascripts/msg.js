@@ -1,6 +1,6 @@
 
 // var socket = io.connect('http://yaygi.no.de');
-var socket = io.connect('http://localhost');
+var socket = io.connect('http://falling-sunrise-268.herokuapp.com');
   
   global_id = 1;
   function nextid() {
