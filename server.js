@@ -8,6 +8,10 @@ var express = require('express');
 var app = module.exports = express.createServer();
 io = require('socket.io').listen(app);
 
+var mongoose = require('mongoose');
+var db = mongoose.connect('mongodb://localhost/test');
+var Note = require('./models.js').Note(db);
+
 // Configuration
 
 app.configure(function(){
@@ -38,35 +42,52 @@ app.get('/', function(req, res){
   });
 });
 
-
 io.sockets.on('connection', function (socket) {
-  // socket.emit('news', { hello: 'world turning' });
-  socket.on('my other event', function (data) {
-    console.log(data);
+
+  Note.find({}, function(err, notes) {
+    for( i=0; i<notes.length; i++  ) {
+      console.log( "create/update note: ");
+      console.log( notes[i] );
+      socket.emit( 'create', notes[i] );
+      socket.emit( 'update', notes[i] );
+      socket.emit( 'dragstop', notes[i] );
+    }
   });
-  socket.on('newnote', function(data) {
+
+  socket.on('created', function(data) { // new note created
+    console.log('created a new note')
+    console.log(data);
+    note = new Note(data);
+    note.save();
+    io.sockets.emit( 'create', { text: data.text, guid: data.guid });
+  });
+  
+  socket.on('newnote', function(data) {  // update text in a note
     console.log('got a new note');
     console.log(data);
-    
+    Note.update({ guid: data.guid }, 
+      { text : data.text },
+      {},
+      function(err, note) {
+      console.log( 'saving note');
+      console.log( note );
+    });
     io.sockets.emit( 'update', { text: data.text, guid: data.guid } );
   });
   
-  socket.on('created', function(data) {
-    console.log('created a new note')
-    console.log(data);
-    io.sockets.emit( 'create', { text: data.text, guid: data.guid });
-  })
-  
-  socket.on('dragstop', function(data) {
+  socket.on('dragstop', function(data) {  // new position for note
     console.log('got dragstop data');
     console.log(data);
+    Note.update({ guid: data.guid }, {
+      top  : data.top,
+      left : data.left
+    }, 
+    {}, 
+    function(err, data) {
+      console.log( "in dragstop, updating note. data is: ");
+      console.log( data );
+    });
     io.sockets.emit( 'dragstop', { guid: data.guid, top: data.top, left: data.left });
-  })
-  
-  socket.on('drag', function(data) {
-    console.log('got drag data');
-    console.log(data);
-    io.sockets.emit( 'drag', { guid: data.guid, top: data.top, left: data.left });
   })
 });
 
