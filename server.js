@@ -9,7 +9,7 @@ var app = module.exports = express.createServer();
 io = require('socket.io').listen(app);
 
 var mongoose = require('mongoose');
-var db = mongoose.connect('mongodb://localhost/test');
+var db = mongoose.connect('mongodb://yaygi.no.de/test');
 var Note = require('./models.js').Note(db);
 
 // Configuration
@@ -92,6 +92,7 @@ io.sockets.on('connection', function (socket) {
 });
 
 
-port = process.env.PORT || 3000
+// port = process.env.PORT || 3000 // for heroku
+port = 80 // for no.de
 app.listen(port);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
