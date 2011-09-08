@@ -9,7 +9,7 @@ var app = module.exports = express.createServer();
 io = require('socket.io').listen(app);
 
 var mongoose = require('mongoose');
-var db = mongoose.connect('mongodb://yaygi.no.de/test');
+var db = mongoose.connect('mongodb://localhost/test');
 console.log( db );
 var Note = require('./models.js').Note(db);
 
