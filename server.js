@@ -90,6 +90,13 @@ io.sockets.on('connection', function (socket) {
     });
     io.sockets.emit( 'dragstop', { guid: data.guid, top: data.top, left: data.left });
   })
+  
+  socket.on('delete', function(data) {
+    Note.remove({ guid: data.guid }, function(err,data) {
+      console.log( 'Removing note: guid ' + data.guid );
+    });
+    io.sockets.emit( 'delete', { guid: data.guid });
+  });
 });
 
 
